@@ -20,12 +20,13 @@ graph_with_who <- function(DFdataUnderCite, DFdataUnderShare, title=NULL) {
     mydata2 <- junto
     DFG <- lapply(mydata2, factor, levels = likertLabels)
     #DFG <- lapply(mydata2, factor, levels = 1:5)
-    #print(DFG)
+    print(DFG)
     d <- data.frame(DFG)
     ##plot
     df24<-likert(d)
     s<- plot(df24, color=cc,text.size=4, plot.percents=TRUE,  plot.percents.center=FALSE,plot.percent.neutral=FALSE,plot.percent.low=FALSE, plot.percent.high=FALSE, ordered=FALSE, group.order=names(d), include.histogram=TRUE)
     s
+
 
     s<- plot(df24, color=cc,text.size=9,plot.percents=TRUE, plot.percent.neutral=FALSE,plot.percent.low=FALSE, plot.percent.high=FALSE, ordered=FALSE, group.order=names(d))
     s + theme(text = element_text(size=34), plot.title = element_text(lineheight=.8, face="bold", size=30)) + ggtitle(title)
