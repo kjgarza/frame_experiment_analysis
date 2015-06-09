@@ -1,0 +1,16 @@
+sessionid,academic,awareness,data_file_title_1,data_file_title_2,discipline,ease_1,ease_2,frequency,honest,howmany,materials_type,regret_1,regret_2,support_1,support_2,time_1,time_2,time_awareness_evaluation,time_create,time_create_1,time_create_2,time_first_evaluation,time_second_evaluation,tongue,treatment_1,treatment_2,treatment_eval_1,treatment_eval_2,trial_1,trial_2,trust,updating,ways,when_best,when_to_1,when_to_2,with_who_1,with_who_2,year_born,measure_2,measure_1
+b4bd8ddfbcf302338f7898eec8382690,1.0,,,,,5.0,5.0,,,,,1.0,5.0,5.0,5.0,5.0,5.0,,,,,,,,cite DataLabour,,cite DataLabour,cite DataLabour,,,,,,,null,null,public,public,,5,5
+90c08c4bb24fd7715f6dce58d09061f4,1.0,,,,,4.0,,,,,,2.0,,4.0,,5.0,,,,,,,,,cite DataLabour,,cite DataLabour,,,,,,,,null,,public,,,0,5
+2916e59453604e0bf19d4b3b60b75fdd,1.0,,,,,4.0,4.0,,,,,1.0,1.0,4.0,4.0,4.0,4.0,,,,,,,,cite DataLabour,,cite DataLabour,Jam Share Data,,,,,,,null,,public,public,,5,5
+28d0f45805f4a2e9ec4d8fe4cf2e517e,2.0,,,,,4.0,4.0,,,,,2.0,2.0,4.0,4.0,4.0,4.0,,,,,,,,cite DataLabour,,cite DataLabour,Jam Share Data,,,,,,,null,,public,public,,5,5
+0ad6197707803a31a98aa69dccc39bad,1.0,,,,,5.0,5.0,,,,,3.0,3.0,3.0,3.0,5.0,5.0,,,,,,,,cite DataLabour,,cite DataLabour,cite DataLabour,,,,,,,null,null,public,public,,5,5
+3068cc431534949de153e1b77a9ae420,,,,,,4.0,4.0,,,,,2.0,3.0,4.0,4.0,4.0,4.0,,,,,,,,cite DataLabour,,cite DataLabour,cite DataLabour,,,,,,,null,1,public,collaborators,,3,5
+d8695dead80bb8f3ba0caa25e5ca785c,2.0,,,,,4.0,,,,,,2.0,,4.0,,4.0,,,,,,,,,cite DataLabour,,cite DataLabour,,,,,,,,null,,public,,,0,5
+4379192aef2087ff9a349056bcbb6bb4,1.0,,,,,1.0,4.0,,,,,3.0,3.0,1.0,3.0,1.0,4.0,,,,,,,,cite DataLabour,,cite DataLabour,cite DataLabour,,,,,,,1,1,collaborators,collaborators,,3,3
+8ed6774338c3fee17bbdca2dfbc7f1d6,2.0,,,,,4.0,4.0,,,,,3.0,3.0,4.0,4.0,4.0,4.0,,,,,,,,cite DataLabour,,cite DataLabour,Jam Share Data,,,,,,,1,later,collaborators,collaborators,,3,3
+f1deeddb2588e790d7425adfa7ffb307,1.0,,,,,4.0,4.0,,,,,2.0,2.0,4.0,4.0,4.0,4.0,,,,,,,,cite DataLabour,,cite DataLabour,Jam Share Data,,,,,,,null,,public,public,,5,5
+d1cf1e2bd3e41f2bd3576a32593e2f73,1.0,,,,,4.0,4.0,,,,,2.0,2.0,3.0,3.0,4.0,4.0,,,,,,,,cite DataLabour,,cite DataLabour,Jam Share Data,,,,,,,null,,public,public,,5,5
+c2026cc168583afd72bbfbb284c0f1e9,1.0,[u'1'],Test,test2,Bioinformatics,5.0,5.0,5.0,on,between 2 and 4,"MS data: raw,mzml",3.0,3.0,4.0,4.0,5.0,5.0,1423477747.0,,1423477358.0,1423477586.0,1423477410.0,1423477633.0,"[u""I'm a native English speaker"", u'']",cite DataLabour,Jam Share Data,cite DataLabour,Jam Share Data,0.0,1.0,first,,[u'2'],5.0,6.0,,stackeholders,public,1987.0,5,0
+f9f6ae29cb7fdbe8995e496792d87aac,,,,,,4.0,,,,,,4.0,,3.0,,5.0,,,,,,,,,Jam Share Data,,Jam Share Data,,,,,,,,02/28/2015,,collaborators,,,0,3
+a3fb71f8688c810c126ede0a989b79cc,1.0,,,,,4.0,2.0,,,,,3.0,2.0,4.0,,4.0,2.0,,,,,,,,Jam Share Data,,Jam Share Data,Jam Share Data,,,,,,,later,later,collaborators,private,,1,3
+68ec3fb55059c118977c24cbd4fca91c,1.0,[u'3'],My DATASET,my datatset,Biology,4.0,4.0,5.0,on,between 2 and 4,data in spreadsheets,3.0,2.0,4.0,4.0,4.0,4.0,1423476906.0,,1423476579.0,1423476812.0,1423476623.0,1423476842.0,"[u""I'm a native English speaker"", u'']",Jam Share Data,cite DataLabour,Jam Share Data,cite DataLabour,0.0,1.0,second,,[u'4'],5.0,,,public,public,1978.0,5,5
