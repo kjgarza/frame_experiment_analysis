@@ -1,0 +1,41 @@
+sessionid,materials_type
+0687ef14d441706b211ff0edf9f2ebea,enzyme kinietics
+0ddaf25718c6b4c35bf05ae6335150d4,multi-dimensional free energy maps
+18da94199bf2471a70d0298958543bb4,chemical production
+23ba4e6b2b149ba6294bd7e0125b2948,"Metabolome data, mathematical models"
+2bd5b76b8fac74b062c1a99c9bbc0a75,"Mathematical models as Boolean equation systems, discretized data from literature"
+2be130732b05502a4a631bc01291b25b,"Trajectories of simulated systems,  models and results from simulations. All in XML"
+38c7d17c9d41c293afe9d368d45a629c,"start from NGS data end with differentially expressed genes, networks, expression levels, ..."
+3ea2814b0443687ea2400e6c1726d7ab,"NGS, biobanking"
+4306bad121fb3ad1fb2365dda1a32440,molecular data (e.g. CML)
+52d3867f738f6cff74269cf62e3b7251,Next generation sequencing data (raw and processed)
+5b114f95a429eb982fc0b378c64a23f9,"Sequencing reads (DNA, RNA) from various platforms (454,Illumina) for various omics analyses"
+6b216d7a04c90e3490fb335b6dc39314,MS proteomics
+6fd7664989b2b16f85c63169595bb66e,"phylogenetic trees, alignments of nucleotide sequences, source code"
+78764885189f4abe3a13ee47ebe3d1fa,"Human protein data, web site, files, ..."
+78a96862e5913958feedfe14d1fab097,sungaling pathway delineation
+78d147e21c80109dbbd9d20b4c0e9599,"mRNA Data, Elechrochemical data (CA and CVs), HPLC analysis"
+7f28b3efad0d8ae171c6b1ef5f121fae,Literature data
+7f6ad16cca9e095737b8ad8089f11f51,Microarray data; RNAseq data; NGS
+82767106b0a1223876d8e83a304c0ebb,mRNA analysis spreadsheets
+84435907d0139de1cd4eaf5a4992ee6c,"SBML,flat files,microarray and RNA raw data(mev,gpr,cel)"
+84876d35deb805f65d6a102cb79760f9,derived lab data
+8d302b9b42e172fd68dc46cdde1bde56,"pre-clinical research data, linked data"
+904ea89665852be4d0df452236a32395,NMR spectra of proteins
+93db2c509aad8d09d515c8e71ea60fce,large integrated datasets from cross-domain queries; NGS sequence data
+9ea45926a9c8ed339eb51007083b6d56,drug discovery predictions
+aaab26582025ca57df98adab9c821786,predictive toxicology
+b216c2e229949e81796327f3a133252e,"mathematical models using Mathematica, C ..."
+b57ae216d47820a5a597768ddc48fdca,Analysis in spreadsheets
+c0ba478916443e75928dc18d1bc8e468,mathematical models
+c122797a0a6e34e5c7159bb839ab9cec,"phylogenetic datamatrices, diversity data, photographs, scripts for phylogenetic software"
+c424cb968746b9c146cfda7af86bd46f,"various analysis data such as from chromatography, multi-dimensional mass spectrometry, etc"
+c4855b2635f52a5f8f10a13348b2e688,Animal behaviour data in spreadsheets
+c4af4b34d71a116d49cfd1bbc37115dc,"varied mix of high-throughput microarray and sequencing data, that I proces in R"
+ce4dd38c1a2b00597a5937d82828d532,RDF data
+d88bf82976822f5950e5bc4cf56e700a,gene expression data
+dce82b0bd1c889c42227c7290aa6cec0,bam files
+ed4707fdbf643cdb6651a9d7807d8048,"Analysis in Spreadsheets, graphs"
+f3906c5106e79f3165050a0fcbbf4cc3,genomic data
+fa251851931ddd1b63a9d66bd90ca95c,"Transcriptomic data, gene expression datasets"
+fc5bb1982077af9dd12aa7de0a5660c3,"SBML models, genomic data"

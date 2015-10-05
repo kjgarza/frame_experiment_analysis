@@ -9,6 +9,8 @@ import helpers.GibberishDetector.gib_detect_train as gb_train
 import helpers.GibberishDetector.gib_detect as gb
 from scipy.stats import mode
 import random
+import re
+
 
 class FrameExperimentTable:
 
@@ -139,8 +141,76 @@ class FrameExperimentTable:
         self.detect_gibberish()
         self.classify_field()
         self.compute_usability_metric()
+        self.code_tongue()
+        self.code_ways()
+        # self.code_awareness()
 
         data_filtered = self.data.copy(deep=True)
+
+
+        print "Total"
+        total = data_filtered.shape[0]
+        full = data_filtered
+        print total
+        data_filtered =  full[(full['gibberish'] == True)]
+        ## filter gibberish
+        print "Removing testing"
+        testing = data_filtered.shape[0]
+        print total-testing
+
+        total = data_filtered.shape[0]
+        data_filtered =  data_filtered[(data_filtered['academic'] < 3)]
+        ## filter gibberish
+        print "Removing Random"
+        randoms = data_filtered.shape[0]
+        print total-randoms
+
+        total = data_filtered.shape[0]
+        data_filtered =  data_filtered[(data_filtered['field'] != '')]
+        ## filter gibberish
+        print "Removing Not Life Sciences"
+        not_life = data_filtered.shape[0]
+        print total-not_life
+
+        total = data_filtered.shape[0]
+        data_filtered =  data_filtered[(data_filtered['tongue'] == 'skilled')]
+        ## filter gibberish
+        print "Removing Not enlgish skilled"
+        englished = data_filtered.shape[0]
+        print total-englished
+
+        total = data_filtered.shape[0]
+        data_filtered =  data_filtered[(data_filtered['honest'] == 'on')]
+        ## filter gibberish
+        print "Removing Not Honest"
+        dishonest = data_filtered.shape[0]
+        print total-dishonest
+
+        total = data_filtered.shape[0]
+        data_filtered =  data_filtered[(data_filtered['awareness'] != 'blind')]
+        ## filter gibberish
+        print "Removing unaware"
+        not_aware = data_filtered.shape[0]
+        print total-not_aware
+
+        total = data_filtered.shape[0]
+        data_filtered =  data_filtered[(data_filtered['with_who_1'].notnull())]
+        ## filter gibberish
+        print "Removing Not answer"
+        not_answer = data_filtered.shape[0]
+        print total-not_answer
+
+        total = data_filtered.shape[0]
+        data_filtered =  data_filtered[(data_filtered['with_who_2'].notnull())]
+        ## filter gibberish
+        print "Removing Not answer"
+        not_answer = data_filtered.shape[0]
+        print total-not_answer
+        print "Total"
+        print total
+
+        data_filtered = self.data.copy(deep=True)
+
 
         data_filtered =  data_filtered[
             ## filter gibberish
@@ -151,6 +221,9 @@ class FrameExperimentTable:
             # (data_filtered['honest'] == 'on') &
             # (data_filtered['field'] == 'LS') &
             (data_filtered['field'] != '') &
+            (data_filtered['tongue'] == 'skilled') &
+            (data_filtered['awareness'] != 'blind') &
+            # (data_filtered['awareness'] != 'avoid') &
 
             # (data_filtered['time_1'].notnull()) &
             # (data_filtered['ease_1'].notnull()) &
@@ -158,6 +231,8 @@ class FrameExperimentTable:
             # (data_filtered['regret_1'].notnull()) &
             (data_filtered['with_who_1'].notnull())
         ]
+
+
 
         self.data = data_filtered
         return data_filtered
@@ -198,40 +273,146 @@ class FrameExperimentTable:
         return r
 
 
+    def code_awareness(self):
+        df = self.data.copy(deep=True)
+
+        def check_awareness(row):
+            r = str(row)
+
+            data = (r).split(',')
+            PATTERN = re.compile(r"""([^'una, \[\]])""",re.UNICODE)
+
+            y = map(lambda x: re.search(PATTERN, x), data)
+
+            def traverse(o, tree_types=(list, tuple)):
+                if isinstance(o, tree_types):
+                    for value in o:
+                        for subvalue in traverse(value):
+                            if subvalue != None:
+                                yield subvalue.group()
+                else:
+                    yield o
+
+
+
+            y = list(traverse(y))
+            y = map(int,y)
+
+            y = set(y)
+
+            if set([1,3]).issubset(y):
+                a = 'full'
+            elif 3 in y:
+                a = 'publication'
+            elif 4 in y:
+                a = 'blind'
+            elif 1  in y:
+                a = 'half'
+            else:
+                a = 'avoid'
+            print a
+            return a
+
+
+        df['awareness'] = df.apply(lambda row: check_awareness(row['awareness']), axis=1)
+        self.data = df
+
+
     def code_ways(self):
         df = self.data.copy(deep=True)
 
-        def add_lang_skill(row):
-            r = pd.Series(row).fillna("0")
+        def check_ways(row):
+            r = str(row)
 
-            r = r.replace(["1","2","3","4"],[1,2,3,4])
-            # r = r.replace(["1","2","3","4"],["request","open_repository","inst_repository","i_dont"])
-            print r.shape
-            # if r.count() >= 2:
-            #     a = 'skilled'
-            # else:
-            #     a = 'unskilled'
-            # return a
+            data = (r).split(',')
+            PATTERN = re.compile(r"""([^'una, \[\]])""",re.UNICODE)
+
+            y = map(lambda x: re.search(PATTERN, x), data)
+
+            def traverse(o, tree_types=(list, tuple)):
+                if isinstance(o, tree_types):
+                    for value in o:
+                        for subvalue in traverse(value):
+                            if subvalue != None:
+                                yield subvalue.group()
+                else:
+                    yield o
 
 
-        df['ways'] = df.apply(lambda row: add_lang_skill(row['ways']), axis=1)
+
+            y = list(traverse(y))
+            y = map(int,y)
+
+            y = set(y)
+            print y
+            a = ""
+            if set([1]).issubset(y):
+                a = 'e-mail'
+            if set([1]).issubset(y) and (set([2]).issubset(y) or set([3]).issubset(y)):
+                a = 'multi'
+            elif set([2]).issubset(y) or set([3]).issubset(y):
+                a = 'self-depositing'
+            if set([4]).issubset(y):
+                a = 'Never'
+            # if set([empty]).issubset(y) in y:
+            #     a = 'avoid'
+            print a
+            return a
+
+
+        df['ways'] = df.apply(lambda row: check_ways(row['ways']), axis=1)
+        self.data = df
+
+    #
+    # def code_ways(self):
+    #     df = self.data.copy(deep=True)
+    #
+    #     def add_lang_skill(row):
+    #         r = pd.Series(row).fillna("0")
+    #
+    #         r = r.replace(["1","2","3","4"],[1,2,3,4])
+    #         # r = r.replace(["1","2","3","4"],["request","open_repository","inst_repository","i_dont"])
+    #         print r.shape
+    #         # if r.count() >= 2:
+    #         #     a = 'skilled'
+    #         # else:
+    #         #     a = 'unskilled'
+    #         # return a
+    #
+    #
+    #     df['ways'] = df.apply(lambda row: add_lang_skill(row['ways']), axis=1)
 
 
     def code_tongue(self):
         df = self.data.copy(deep=True)
 
         def add_lang_skill(row):
-            r = row
-            print type(r)
+            r = str(row)
 
-            r = r.replace(["I'm a native English speaker",
-                           'I have lived in an English speaking country for more than 2 years',
-                           'I have been living in an English speaking country for at least 10 months',
+
+            data = (r).split(',')
+            PATTERN = re.compile(r"""([^'|"\[u]+[\w\W][^'|"\[u]+)""",re.UNICODE)
+
+            y = map(lambda x: re.search(PATTERN, x), data)
+
+            def traverse(o, tree_types=(list, tuple)):
+                if isinstance(o, tree_types):
+                    for value in o:
+                        for subvalue in traverse(value):
+                            if subvalue != None:
+                                yield subvalue.group()
+                else:
+                    yield o
+
+            y = list(traverse(y))
+            y =pd.Series(y)
+
+            y = y.replace(["I'm a native English speaker",
+                           "I have lived in an English speaking country for more than 2 years",
+                           "I have been living in an English speaking country for at least 10 months",
                            "I've learnt English when I was a child ( > 12 years old)",
-                           'I have an English proficiency above professional working level'],[1,3,5,7,9])
-            print r
-
-            if r.sum() >= 3:
+                           "I have an English proficiency above professional working level"],[9,6,2,5,1])
+            if y.sum() >= 2:
                 a = 'skilled'
             else:
                 a = 'unskilled'
@@ -407,6 +588,9 @@ class FrameExperimentTable:
         r[['response','trt','sequ','period','id']].to_csv('repated_meas_df',index=False, header=False)
         print 'rm_ws_dataframe - no duplicates '
         print df.shape
+
+        self.check_rule_oten(r)
+
         return r
 
 
@@ -555,7 +739,10 @@ class FrameExperimentTable:
 
         r[['response','trt','sequ','period','id']].to_csv('repated_meas_df',index=False, header=False)
         print 'rm_ws_dataframe - no duplicates '
-        print df.shape
+        print r.shape
+
+        self.check_rule_oten(r)
+
         return r
 
 
@@ -826,7 +1013,51 @@ class FrameExperimentTable:
         return rm_ws_dataframe
 
 
+    def check_rule_oten(self, rm_ws_dataframe):
+        from statsmodels.graphics.mosaicplot import mosaic
+        d = rm_ws_dataframe.response.value_counts()
+        print d
 
+        return True
+
+    def generate_random_ws_df(self,n):
+
+        if n%2!=0:
+            print "Number has to be even"
+
+        j = np.random.randint(90,2560, size=n/2)
+        ab = np.chararray((n/4, ), itemsize=2)
+        ab[:] = 'AB'
+        ba = np.chararray((n/4, ), itemsize=2)
+        ba[:] = 'BA'
+        xx = np.append(ab,ba)
+        yy = np.append(ab,ba)
+        idx      = pd.Series(np.append(j,j))
+        response = pd.Series(np.random.randint(1,5, size=n))
+        response = pd.Series(np.random.randint(1,5, size=n))
+        # sequ     = pd.Series(np.random.choice(['AB','BA'], size=n))
+        sequ     = pd.Series(np.append(xx,xx))
+        # period   = pd.Series(np.random.randint(1,3, size=n))
+        period   = pd.Series(np.append(np.ones((n/2,), dtype=np.int), np.full((n/2, ), 2, dtype=np.int)))
+        # trt      = pd.Series(np.random.choice(['A','B'], size=n))
+
+        def separate(p,s):
+            t = 0
+            if p == 1:
+                t = s[0][0]
+            if p == 2:
+                t = s[1][0]
+            return t
+
+        data_simu = pd.DataFrame({'response':response,'period':period,'sequ':sequ, 'id':idx})
+        data_simu['trt'] = data_simu.apply(lambda row: separate(row['period'], row['sequ']), axis=1)
+        data_simu = data_simu.sort(['sequ','period','trt'])
+
+
+        data_simu.head(5)
+        data_simu.response.value_counts().plot(kind='bar')
+        data_simu = data_simu.dropna()
+        return data_simu
 
 
 # if __name__ == '__main__':
@@ -850,3 +1081,17 @@ class FrameExperimentTable:
 # ll= fc.get_rm_ws_dataframe_scenarios()
 
 # # print ll
+
+# c = FrameExperimentTable('logs/data_scenario_changed')
+# c.filter_noise()
+# c.code_for_stat_ana()
+# c.code_survey_numeric()
+# new_data = c.get_rm_ws_dataframe()
+#
+# data_n =  c.generate_random_ws_df(53)
+# print data_n
+# # ss = np.chararray((46/2, ), itemsize=2)
+# # ss[:] = 'AB'
+# # print ss
+
+# print data_n.sort(['id','period']).reset_index()
