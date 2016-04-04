@@ -30,7 +30,7 @@ graph_with_who <- function(DFdataUnderCite, DFdataUnderShare, title=NULL) {
 
     s<- plot(df24, color=cc,text.size=9,plot.percents=TRUE, plot.percent.neutral=FALSE,plot.percent.low=FALSE, plot.percent.high=FALSE, ordered=FALSE, group.order=names(d))
     s + theme(text = element_text(size=34), plot.title = element_text(lineheight=.8, face="bold", size=30)) + ggtitle(title)
-    ggsave("~/plt_ef.png", width = 16, height = 9, dpi = 120)
+    ggsave("~/Dropbox/exp_frame_effects/Images/resultsaccessibilityplt.png", width = 16, height = 9, dpi = 120)
 
 }
 
@@ -58,7 +58,7 @@ graph_when <- function(DFdataUnderCiteWhento, DFdataUnderShareWhento, title=NULL
     s
     s<- plot(df24, color=cc,text.size=9,plot.percents=TRUE, plot.percent.neutral=FALSE,plot.percent.low=FALSE, plot.percent.high=FALSE, ordered=FALSE, group.order=names(d))
     s + theme(text = element_text(size=34), plot.title = element_text(lineheight=.8, face="bold", size=30)) + ggtitle(title)
-    ggsave("~/plt_scc.png", width = 16, height = 9, dpi = 120)
+    ggsave("~/Dropbox/exp_frame_effects/Images/resultsembargoengthplt.png", width = 16, height = 9, dpi = 120)
 }
 
 
@@ -117,6 +117,6 @@ graph_linkert<-function(DFdataUnderCiteRegret, DFdataUnderShareRegret){
     s<- plot(df24, color=cc, text.size=4,center=3,plot.percent.low=TRUE, plot.percent.neutral=TRUE,plot.percent.high=TRUE, ordered=FALSE, group.order=names(d))
     s
     s + theme(text = element_text(size=34))
-    ggsave("~/plt_linkert.png", width = 16, height = 9, dpi = 120)
+    ggsave("~/Dropbox/exp_frame_effects/Images/plt_linkert.png", width = 16, height = 9, dpi = 120)
 
 }
