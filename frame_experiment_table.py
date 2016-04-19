@@ -38,6 +38,7 @@ class FrameExperimentTable:
         :param source: csv file
         """
         #define method either new or old
+        assert type(source) is basestring
         new_data = datatoFrame(source, 'dummy4', method)
         pieces = [self.data, new_data]
         self.data = pd.concat(pieces)
@@ -55,6 +56,7 @@ class FrameExperimentTable:
         :param source: csv file
         """
         #define method either new or old
+        assert type(source) is basestring
         new_data = datatoFrame(source, 'dummy4', 'new')
         new_data['scenario'] = scenario
         pieces = [self.data, new_data]
@@ -68,6 +70,7 @@ class FrameExperimentTable:
         :param source: csv file
         """
         #define method either new or old
+        assert type(source) is basestring
         new_data = pd.DataFrame.from_csv(source, sep=',', index_col=0)
         # new_data = pd.DataFrame.from_csv('logs/data_scramble_filled_csv.csv', sep=',', index_col=0)
         pieces = [self.data, new_data]
@@ -151,63 +154,63 @@ class FrameExperimentTable:
         print "Total"
         total = data_filtered.shape[0]
         full = data_filtered
-        print total
+        # print total
         data_filtered =  full[(full['gibberish'] == True)]
         ## filter gibberish
         print "Removing testing"
         testing = data_filtered.shape[0]
-        print total-testing
+        # print total-testing
 
         total = data_filtered.shape[0]
         data_filtered =  data_filtered[(data_filtered['academic'] < 3)]
         ## filter gibberish
         print "Removing Random"
         randoms = data_filtered.shape[0]
-        print total-randoms
+        # print total-randoms
 
         total = data_filtered.shape[0]
         data_filtered =  data_filtered[(data_filtered['field'] != '')]
         ## filter gibberish
         print "Removing Not Life Sciences"
         not_life = data_filtered.shape[0]
-        print total-not_life
+        # print total-not_life
 
         total = data_filtered.shape[0]
         data_filtered =  data_filtered[(data_filtered['tongue'] == 'skilled')]
         ## filter gibberish
         print "Removing Not enlgish skilled"
         englished = data_filtered.shape[0]
-        print total-englished
+        # print total-englished
 
         total = data_filtered.shape[0]
         data_filtered =  data_filtered[(data_filtered['honest'] == 'on')]
         ## filter gibberish
         print "Removing Not Honest"
         dishonest = data_filtered.shape[0]
-        print total-dishonest
+        # print total-dishonest
 
         total = data_filtered.shape[0]
         data_filtered =  data_filtered[(data_filtered['awareness'] != 'blind')]
         ## filter gibberish
         print "Removing unaware"
         not_aware = data_filtered.shape[0]
-        print total-not_aware
+        # print total-not_aware
 
         total = data_filtered.shape[0]
         data_filtered =  data_filtered[(data_filtered['with_who_1'].notnull())]
         ## filter gibberish
         print "Removing Not answer"
         not_answer = data_filtered.shape[0]
-        print total-not_answer
+        # print total-not_answer
 
         total = data_filtered.shape[0]
         data_filtered =  data_filtered[(data_filtered['with_who_2'].notnull())]
         ## filter gibberish
         print "Removing Not answer"
         not_answer = data_filtered.shape[0]
-        print total-not_answer
-        print "Total"
-        print total
+        # print total-not_answer
+        # print "Total"
+        # print total
 
         data_filtered = self.data.copy(deep=True)
 
@@ -238,6 +241,7 @@ class FrameExperimentTable:
         return data_filtered
 
     def code_when_to_num_cat(self, t, w):
+
 
         w = str(w)
         # print w
@@ -310,7 +314,9 @@ class FrameExperimentTable:
                 a = 'half'
             else:
                 a = 'avoid'
-            print a
+            # print a
+
+            assert type(a) is str
             return a
 
 
@@ -344,7 +350,7 @@ class FrameExperimentTable:
             y = map(int,y)
 
             y = set(y)
-            print y
+            # print y
             a = ""
             if set([1]).issubset(y):
                 a = 'e-mail'
@@ -356,7 +362,7 @@ class FrameExperimentTable:
                 a = 'Never'
             # if set([empty]).issubset(y) in y:
             #     a = 'avoid'
-            print a
+            # print a
             return a
 
 
@@ -496,7 +502,7 @@ class FrameExperimentTable:
 
         self.data_for_analy = xf
 
-        print xf.shape
+        # print xf.shape
         return xf
 
 
@@ -504,14 +510,14 @@ class FrameExperimentTable:
 
         # self.code_survey_numeric()
         df = self.get_data()
-        print df.shape
+        # print df.shape
         df['usability_2'] = df.apply(lambda row: np.median([row['ease_2'],row['support_2'],row['time_2']]), axis=1)
         df['usability_1'] = df.apply(lambda row: np.median([row['ease_1'],row['support_1'],row['time_1']]), axis=1)
         # MODE is not a good measure of centrality for ordinal data
         # df['usability_2'] = df.apply(lambda row: mode([row['ease_2'],row['support_2'],row['time_2']])[0][0], axis=1)
         # df['usability_1'] = df.apply(lambda row: mode([row['ease_1'],row['support_1'],row['time_1']])[0][0], axis=1)
-        print "New Usability Columns"
-        print df.shape
+        # print "New Usability Columns"
+        # print df.shape
 
         self.data = df
         return df
@@ -558,14 +564,14 @@ class FrameExperimentTable:
         ###Droping missing records
         df = df[['treatment_eval_1','treatment_eval_2','with_who_1','with_who_2']].dropna()
         df['id']= df.index.values
-        print 'rm_ws_dataframe - Droping missing records'
-        print df.shape
+        # print 'rm_ws_dataframe - Droping missing records'
+        # print df.shape
 
 
         ###Remove missing data
         df = df[df.treatment_eval_1 != df.treatment_eval_2]
-        print 'rm_ws_dataframe - remove missing data '
-        print df.shape
+        # print 'rm_ws_dataframe - remove missing data '
+        # print df.shape
 
         ## get random sample for when models are not same size
         # rows = random.sample(df.index, 24)
@@ -586,8 +592,8 @@ class FrameExperimentTable:
         # r['response'] = r['response'].replace(['private','collaborators','stakeholders','public'],[1,2,3,4])
 
         r[['response','trt','sequ','period','id']].to_csv('repated_meas_df',index=False, header=False)
-        print 'rm_ws_dataframe - no duplicates '
-        print df.shape
+        # print 'rm_ws_dataframe - no duplicates '
+        # print df.shape
 
         self.check_rule_oten(r)
 
@@ -636,14 +642,14 @@ class FrameExperimentTable:
         ###Droping missing records
         df = df[['treatment_eval_1','treatment_eval_2','usability_1','usability_2']].dropna()
         df['id']= df.index.values
-        print 'rm_ws_dataframe - Droping missing records'
-        print df.shape
+        # print 'rm_ws_dataframe - Droping missing records'
+        # print df.shape
 
 
         ###Remove missing data
         df = df[df.treatment_eval_1 != df.treatment_eval_2]
-        print 'rm_ws_dataframe - remove missing data '
-        print df.shape
+        # print 'rm_ws_dataframe - remove missing data '
+        # print df.shape
 
         ## get random sample for when models are not same size
         # rows = random.sample(df.index, 24)
@@ -664,8 +670,8 @@ class FrameExperimentTable:
         # r['response'] = r['response'].replace(['private','collaborators','stakeholders','public'],[1,2,3,4])
 
         r[['response','trt','sequ','period','id']].to_csv('repated_meas_df',index=False, header=False)
-        print 'rm_ws_dataframe - no duplicates '
-        print df.shape
+        # print 'rm_ws_dataframe - no duplicates '
+        # print df.shape
         return r
 
     def get_rm_ws_df(self, measure_1, measure_2):
@@ -710,14 +716,14 @@ class FrameExperimentTable:
         ###Droping missing records
         df = df[['treatment_eval_1','treatment_eval_2',measure_1,measure_2]].dropna()
         df['id']= df.index.values
-        print 'rm_ws_dataframe - Droping missing records'
-        print df.shape
+        # print 'rm_ws_dataframe - Droping missing records'
+        # print df.shape
 
 
         ###Remove missing data
         df = df[df.treatment_eval_1 != df.treatment_eval_2]
-        print 'rm_ws_dataframe - remove missing data '
-        print df.shape
+        # print 'rm_ws_dataframe - remove missing data '
+        # print df.shape
 
         ## get random sample for when models are not same size
         # rows = random.sample(df.index, 24)
@@ -738,8 +744,8 @@ class FrameExperimentTable:
         # r['response'] = r['response'].replace(['private','collaborators','stakeholders','public'],[1,2,3,4])
 
         r[['response','trt','sequ','period','id']].to_csv('repated_meas_df',index=False, header=False)
-        print 'rm_ws_dataframe - no duplicates '
-        print r.shape
+        # print 'rm_ws_dataframe - no duplicates '
+        # print r.shape
 
         self.check_rule_oten(r)
 
@@ -780,18 +786,18 @@ class FrameExperimentTable:
 
         # self.code_survey_numeric()
         df = self.get_anadata()
-        print df.shape
-        print "sasa"
+        # print df.shape
+        # print "sasa"
 
         ###Droping missing records
         df = df[['treatment_eval_1','treatment_eval_2','when_to_1','when_to_2']]
         df['id']= df.index.values
-        print df.shape
+        # print df.shape
 
 
         ###Remove missing data
         df = df[df.treatment_eval_1 != df.treatment_eval_2]
-        print df.shape
+        # print df.shape
 
         df['seq'] = df.apply(lambda row: add_seq(row), axis=1)
         s = pd.melt(df, id_vars=['treatment_eval_1', 'treatment_eval_2','seq','id'])
@@ -808,7 +814,7 @@ class FrameExperimentTable:
 
 
         r[['response','trt','sequ','period','id']].to_csv('repated_meas_df',index=False, header=False)
-        print r.shape
+        # print r.shape
         return r
 
 
@@ -837,7 +843,7 @@ class FrameExperimentTable:
 
 
         df = self.get_anadata()
-        print df.shape
+        # print df.shape
 
         df['id']= df.index.values
         df['seq'] = df.apply(lambda row: add_seq2(row), axis=1)
@@ -881,7 +887,7 @@ class FrameExperimentTable:
 
 
         df = self.get_anadata()
-        print df.shape
+        # print df.shape
 
         df['id']= df.index.values
         # df['seq'] = df.apply(lambda row: add_seq2(row), axis=1)
@@ -961,18 +967,18 @@ class FrameExperimentTable:
 
 
 
-        print df.shape
-        print "sasa"
+        # print df.shape
+        # print "sasa"
 
         ###Droping missing records
         df = df[['treatment_eval_1','treatment_eval_2','with_who_1','with_who_2','scenario']].dropna()
         df['id']= df.index.values
-        print df.shape
+        # print df.shape
 
 
         ###Remove missing data
         df = df[df.treatment_eval_1 != df.treatment_eval_2]
-        print df.shape
+        # print df.shape
 
         ## get random sample for when models are not same size
         # rows = random.sample(df.index, 24)
@@ -995,7 +1001,7 @@ class FrameExperimentTable:
 
 
         r[['response','trt','sequ','period','id','scenario']].to_csv('repated_meas_scenario',index=False, header=False)
-        print r.shape
+        # print r.shape
         return r
 
 

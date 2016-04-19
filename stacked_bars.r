@@ -3,9 +3,13 @@ require(reshape)
 library(RColorBrewer)
 library(plyr)
 library(ggplot2)
-
+library(assertive)
 
 graph_with_who <- function(DFdataUnderCite, DFdataUnderShare, title=NULL) {
+
+    assert_is_list(DFdataUnderCite)
+    assert_is_list(DFdataUnderShare)
+
     ## setup
     ##cc <-brewer.pal(4, "PuBu")
     cc <-colorRampPalette(brewer.pal(11, 'PuBu'))(30)
@@ -18,25 +22,30 @@ graph_with_who <- function(DFdataUnderCite, DFdataUnderShare, title=NULL) {
     junto <-do.call(rbind.fill, myList5)
     djunto <- data.frame(junto)
     mydata2 <- junto
+#    print(junto)
     DFG <- lapply(mydata2, factor, levels = likertLabels)
     #DFG <- lapply(mydata2, factor, levels = 1:5)
-    print(DFG)
+#    print(DFG)
     d <- data.frame(DFG)
     ##plot
     df24<-likert(d)
-    s<- plot(df24, color=cc,text.size=4, plot.percents=TRUE,  plot.percents.center=FALSE,plot.percent.neutral=FALSE,plot.percent.low=FALSE, plot.percent.high=FALSE, ordered=FALSE, group.order=names(d), include.histogram=TRUE)
-    s
 
 
+#    s<- plot(df24, color=cc,text.size=4, plot.percents=TRUE,  plot.percents.center=FALSE,plot.percent.neutral=FALSE,plot.percent.low=FALSE, plot.percent.high=FALSE, ordered=FALSE, group.order=names(d), include.histogram=TRUE)
+#    s
     s<- plot(df24, color=cc,text.size=9,plot.percents=TRUE, plot.percent.neutral=FALSE,plot.percent.low=FALSE, plot.percent.high=FALSE, ordered=FALSE, group.order=names(d))
     s + theme(text = element_text(size=34), plot.title = element_text(lineheight=.8, face="bold", size=30)) + ggtitle(title)
     ggsave("~/Dropbox/exp_frame_effects/Images/resultsaccessibilityplt.png", width = 16, height = 9, dpi = 120)
-
+    s
 }
 
 
 graph_when <- function(DFdataUnderCiteWhento, DFdataUnderShareWhento, title=NULL ){
 #    cc <-brewer.pal(4, "RdPu")
+
+
+    assert_is_list(DFdataUnderCiteWhento)
+    assert_is_list(DFdataUnderShareWhento)
 
     cc <-colorRampPalette(brewer.pal(11, 'RdPu'))(30)
     cc <- cc[c(9,13,19,27)]
@@ -54,11 +63,12 @@ graph_when <- function(DFdataUnderCiteWhento, DFdataUnderShareWhento, title=NULL
 
     d <- data.frame(DFG)
     df24<-likert(d)
-    s<- plot(df24, color=cc,text.size=4,plot.percents=TRUE, plot.percent.neutral=FALSE,plot.percent.low=FALSE, plot.percent.high=FALSE, ordered=FALSE, group.order=names(d), include.histogram=TRUE)
-    s
-    s<- plot(df24, color=cc,text.size=9,plot.percents=TRUE, plot.percent.neutral=FALSE,plot.percent.low=FALSE, plot.percent.high=FALSE, ordered=FALSE, group.order=names(d))
+#    s<- plot(df24, color=cc,text.size=4,plot.percents=TRUE, plot.percent.neutral=FALSE,plot.percent.low=FALSE, plot.percent.high=FALSE, ordered=FALSE, group.order=names(d), include.histogram=TRUE)
+#    s
+    s<- ggplot2(df24, color=cc,text.size=9,plot.percents=TRUE, plot.percent.neutral=FALSE,plot.percent.low=FALSE, plot.percent.high=FALSE, ordered=FALSE, group.order=names(d))
     s + theme(text = element_text(size=34), plot.title = element_text(lineheight=.8, face="bold", size=30)) + ggtitle(title)
     ggsave("~/Dropbox/exp_frame_effects/Images/resultsembargoengthplt.png", width = 16, height = 9, dpi = 120)
+    s
 }
 
 

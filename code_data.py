@@ -11,7 +11,7 @@ from extract_data import datatoFrame
 def main(input_file):
 
     input_data = datatoFrame(input_file, 'dummy')
-    print input_data
+    # print input_data
 
 
 def code_baseline(series):
